@@ -123,3 +123,23 @@ var tryApi = {
     Response: true,
 };
 console.log(tryApi);
+// extra
+var omdbURL = "https://www.omdbapi.com/?apikey=24ad60e9&i=tt1201607";
+var getMovie = function () {
+    fetch(omdbURL)
+        .then(function (response) {
+        if (response.ok) {
+            return response.json();
+        }
+        else {
+            throw new Error();
+        }
+    })
+        .then(function (data) {
+        console.log(data);
+    })
+        .catch(function (err) {
+        console.log("erroe nella fetch", err);
+    });
+};
+getMovie();

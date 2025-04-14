@@ -184,6 +184,8 @@ const wolks: Veicolo = {
 // si è assolutamente possibile avere più tipi generici in un interfaccia <a , b >
 
 // 20) Crea un'interfaccia generica per una risposta API.
+
+// ispirazione dell'api https://www.omdbapi.com/?apikey=24ad60e9&i=tt1201607
 interface Rating {
   Source: string;
   Value: string;
@@ -260,3 +262,24 @@ const tryApi: API<Rating[]> = {
 };
 
 console.log(tryApi);
+
+// extra
+const omdbURL = "https://www.omdbapi.com/?apikey=24ad60e9&i=tt1201607";
+const getMovie = () => {
+  fetch(omdbURL)
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error();
+      }
+    })
+    .then((data: API<Rating[]>) => {
+      console.log(data);
+    })
+    .catch((err) => {
+      console.log("erroe nella fetch", err);
+    });
+};
+
+getMovie();
